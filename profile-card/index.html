@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="profile-card.css">
+</head>
+<body>
+    <div class="profile-card">
+        <img src="./image/Untitled design.png" 
+             alt="Profile Picture" 
+             class="profile-pic"
+             data-testid="profilePicture">
+        
+        <h1 data-testid="fullName">Alabi Temitope</h1>
+        
+        <div class="job-title" data-testid="jobTitle">Junior Full Stack Developer</div>
+        
+        <p class="bio" data-testid="shortBio">
+            I'm a Fullstack Developer committed to honing my skills and crafting innovative, user-focused projects.
+        </p>
+        
+        <div class="contact-info">
+            <div class="location" 
+                 data-testid="currentLocation"
+                 data-location="Osogbo, Nigeria">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <a title="visit email"
+               href="mailto:alabitemitope51@gmail.com" 
+               class="email"
+               data-testid="emailAddress">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <div class="social-links" data-testid="socialLinks">
+            <a title="visit linkedin profile" href="https://www.linkedin.com/in/toptech9/" class="social-link"><i class="fab fa-linkedin"></i></a>
+            <a title="visit github profile"  href="https://github.com/toptech5419" class="social-link"><i class="fab fa-github"></i></a>
+            <a title="visit twitter profile" href="https://x.com/Toptech5419" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a title="visit medium profile"  href="https://medium.com/@alabitemitope51" class="social-link"><i class="fab fa-medium"></i></a>
+        </div>
+        
+        <div class="utc-time" data-testid="currentTimeUTC"></div>
+    </div>
+
+    <script src="profile-card.js" defer></script>
+</body>
+</html>

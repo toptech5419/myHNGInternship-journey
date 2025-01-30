@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-card {
+    background: linear-gradient(135deg, rgba(41, 128, 185, 0.15), rgba(142, 68, 173, 0.1));
+    -webkit-backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transform-style: preserve-3d;
+    animation: cardEntrance 1s ease-out;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(50px) rotateX(30deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    border: 3px solid rgba(255,255,255,0.2);
+    transition: transform 0.3s;
+    cursor: pointer;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block
+}
+
+.profile-pic:hover {
+    transform: scale(1.1) rotateZ(5deg);
+}
+
+h1[data-testid="fullName"] {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.job-title {
+    color: #00ff88;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.bio {
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.location {
+    position: relative;
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    transition: color 0.3s;
+}
+
+.location:hover {
+    color: #00ff88;
+}
+
+.location:hover::after {
+    content: attr(data-location);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.email {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.email:hover {
+    color: #00ff88;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.social-link {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.8);
+    transition: all 0.3s;
+    transform: translateZ(0);
+    position: relative;
+}
+
+.social-link:hover {
+    color: #00ff88;
+    transform: translateZ(20px) scale(1.2);
+    text-shadow: 0 0 10px rgba(0,255,136,0.5);
+}
+
+.utc-time {
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 1.5rem;
+    }
+    
+    h1[data-testid="fullName"] {
+        font-size: 1.5rem;
+    }
+    
+    .job-title {
+        font-size: 1rem;
+    }
+}
