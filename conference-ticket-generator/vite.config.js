@@ -6,11 +6,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: './index.html' // Explicit entry point
-      }
-    }
+    // Remove rollupOptions unless you have multiple entry points
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  base: '/', // Add base path
+  server: {
+    host: true, 
+  }
 })

@@ -3,10 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "start": "vite preview",
-    "build": "vite build"
+    "scripts": {
+      "dev": "vite",
+      "start": "vite preview --host",
+      "build": "vite build",
+      "preview": "vite preview"
   },
   "dependencies": {
     "@cloudinary/react": "^1.13.1",
