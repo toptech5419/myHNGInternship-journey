@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
-import { QRCodeCanvas } from 'qrcode.react'; // QR code library
+import { QRCodeCanvas } from 'qrcode.react'; 
+import { useMemo } from 'react';
 
 const QRCode = ({ data }) => {
-  return (
-    <div className="qr-code">
-      <QRCodeCanvas value={data} size={128} />
-    </div>
-  );
+  const qrCode = useMemo(() => <QRCodeCanvas value={data} size={128} />, [data]);
+
+  return <div className="qr-code">{qrCode}</div>;
 };
 
 // ✅ Add PropTypes Validation

@@ -16,8 +16,14 @@ const ticketReducer = (state, action) => {
   switch (action.type) {
     case "SET_TICKET_TYPE":
       return { ...state, ticketType: action.payload };
-    case "UPDATE_FORM":
-      return { ...state, formData: { ...state.formData, ...action.payload }};
+      case 'UPDATE_FORM':
+        return {
+            ...state,
+            formData: {
+                ...state.formData,
+                ...action.payload
+            }
+        };
     case "SET_ERRORS":
       return { ...state, errors: action.payload };
     case "SET_STEP":

@@ -24,67 +24,73 @@ const validateForm = (formData) => {
 
 const TicketGenerator = () => {
   const { state, dispatch } = useTicket();
-  const { currentStep, isLoading, formData, errors, ticketType } = state; // Ensure ticketType is pulled
+  const { currentStep, isLoading, formData, errors, ticketType } = state;
+
+
+  console.log("Current Step:", currentStep); // Debugging: Track step changes
+  console.log("Selected Ticket Type:", ticketType); // Debugging: Ensure ticketType updates
 
   const handleNext = () => {
     const formErrors = validateForm(formData);
     if (Object.keys(formErrors).length === 0) {
-      dispatch({ type: "SET_STEP", payload: currentStep + 1 });
+        dispatch({ type: "SET_STEP", payload: currentStep + 1 });
     } else {
-      dispatch({ type: "SET_ERRORS", payload: formErrors });
+        dispatch({ type: "SET_ERRORS", payload: formErrors });
     }
-  };
+};
 
-  return (
-    <div className="container">
-      {/* Progress Bar */}
+
+return (
+  <div className="container">
       <ProgressIndicator 
-        currentStep={currentStep} 
-        totalSteps={3} 
-        progress={(currentStep - 1) * 50} 
+          currentStep={currentStep} 
+          totalSteps={3} 
+          progress={(currentStep - 1) * 50} 
       />
 
-      {/* Loading Indicator */}
       {isLoading && <Loading />}
 
-      {/* Step Components */}
-      <div className="ticket-generator-content">
-        {currentStep === 1 && (
-          <StepOne
-            selectedPrice={ticketType} // Ensure this is correctly set
-            onSelectPrice={(price) => 
-              dispatch({ type: "SET_TICKET_TYPE", payload: price })
-            }
-            onNext={() => dispatch({ type: "SET_STEP", payload: 2 })}
-          />
-        )}
+      <div className="ticket-generator-content" style={{ minHeight: '500px' }}>
+          {currentStep === 1 && (
+              <StepOne
+                  selectedPrice={ticketType}
+                  onSelectPrice={(price) => {
+                      console.log("Price Selected:", price);
+                      dispatch({ type: "SET_TICKET_TYPE", payload: price });
+                  }}
+                  onNext={() => {
+                      if (ticketType) { 
+                          dispatch({ type: "SET_STEP", payload: 2 });
+                      }
+                  }}
+              />
+          )}
 
-          
+{currentStep === 2 && (
+    <StepTwo
+        formData={formData}
+        setFormData={(newData) => {
+            dispatch({ 
+                type: "UPDATE_FORM", 
+                payload: newData // Pass only the changed fields
+            });
+        }}
+        errors={errors}
+        onBack={() => dispatch({ type: "SET_STEP", payload: 1 })}
+        onNext={handleNext}
+    />
+)}
 
-        {currentStep === 2 && (
-          <StepTwo
-          formData={formData}
-          setFormData={(data) =>
-            dispatch({ type: "UPDATE_FORM", payload: { ...formData, ...data } })
-          } 
-          errors={errors}
-          onBack={() => dispatch({ type: "SET_STEP", payload: 1 })}
-          onNext={handleNext}
-        />
-        
-        )}
-
-        {currentStep === 3 && (
-          <StepThree
-          formData={formData}
-          ticketType={ticketType}
-          onBack={() => dispatch({ type: "SET_STEP", payload: 2 })} 
-        />
-        
-        )}
+          {currentStep === 3 && (
+              <StepThree
+                  formData={formData}
+                  ticketType={ticketType}
+                  onBack={() => dispatch({ type: "SET_STEP", payload: 2 })}
+              />
+          )}
       </div>
-    </div>
-  );
+  </div>
+);
 };
 
 export default TicketGenerator;

@@ -147,6 +147,33 @@ body {
   margin-right: 0.5rem;
 }
 
+/* For StepTwo image upload */
+.image-upload-container {
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* For both components' images */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-upload-container {
+    max-width: 300px;
+  }
+  
+  .ticket-avatar {
+    max-height: 150px;
+  }
+}
+
 .ticket-preview-container {
     max-width: 400px;
     margin: 0 auto;

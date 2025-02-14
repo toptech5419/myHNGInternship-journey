@@ -21,7 +21,10 @@ const StepOne = ({ selectedPrice, onSelectPrice, onNext }) => {
           <div
             key={option.id}
             className={`price-card ${selectedPrice === option.id ? 'selected' : ''}`}
-            onClick={() => onSelectPrice(option.id)}
+            onClick={() => {
+              console.log("Option Clicked:", option.id); // Debugging
+              onSelectPrice(option.id);
+            }}
           >
             <h3>{option.label}</h3>
             <div className="price-amount">{option.price}</div>
@@ -29,22 +32,11 @@ const StepOne = ({ selectedPrice, onSelectPrice, onNext }) => {
         ))}
       </div>
 
-      <div className="form-group">
-        <label className="form-label">Number of Tickets</label>
-        <select className="form-input">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <div className="text-center">
         <button 
           className="btn btn-primary"
           onClick={onNext}
-          disabled={!selectedPrice}
+          disabled={!selectedPrice} // Ensures button only works if price is selected
         >
           Next
         </button>
@@ -52,6 +44,7 @@ const StepOne = ({ selectedPrice, onSelectPrice, onNext }) => {
     </div>
   );
 };
+
 
 // PropTypes Validation
 StepOne.propTypes = {
