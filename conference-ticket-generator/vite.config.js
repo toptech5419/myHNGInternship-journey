@@ -5,10 +5,12 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: './index.html' // Explicit entry point
+      }
+    }
   },
-  base: '/', // Ensure correct base path
-  server: {
-    open: true
-  }
+  publicDir: 'public'
 })
