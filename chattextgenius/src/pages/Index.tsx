@@ -307,7 +307,7 @@ const Index = () => {
           </div>
         )}
         <ChatInput onSend={handleSendMessage} isProcessing={isProcessing} />
-        <Footer /> 
+        <Footer /> {/* Footer placed at the bottom of the main content area */}
       </div>
     </div>
   );
