@@ -27,7 +27,7 @@ interface Chat {
 const Index = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentChatId, setCurrentChatId] = useState(uuidv4());
-  const [chats, setChats] = useState([{ id: currentChatId, messages: [] }]);
+  const [chats, setChats] = useState<{ id: string; messages: Message[] }[]>([{ id: currentChatId, messages: [] }]);
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
   const messageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -47,7 +47,7 @@ const Index = () => {
         detectedLanguage: detectedLanguage,
       };
     } catch (error) {
-      throw new Error("Error processing message.");
+      throw new Error(`Error processing message: ${error.message}`);
     }
   };
 
@@ -66,6 +66,7 @@ const Index = () => {
   };
 
   const handleSendMessage = async (message: string) => {
+    if (!message.trim()) return; 
     const messageId = uuidv4();
     setIsProcessing(true);
 
@@ -115,7 +116,7 @@ const Index = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to process message. Please try again.",
+        description: `Failed to process message: ${error.message}`,
         variant: "destructive",
       });
     } finally {
@@ -164,7 +165,7 @@ const Index = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to translate message. Please try again.",
+        description: `Failed to translate message: ${error.message}`,
         variant: "destructive",
       });
     } finally {
@@ -220,7 +221,7 @@ const Index = () => {
       console.error("Summarization Error:", error);
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to summarize message",
+        description: `Failed to summarize message: ${error.message}`,
         variant: "destructive",
       });
     } finally {
@@ -237,7 +238,7 @@ const Index = () => {
         latestMessageRef.scrollIntoView({ behavior: "smooth", block: "end" });
       }
     }
-  }, [currentChat?.messages]);
+  }, [currentChat?.messages.length]);
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
@@ -307,7 +308,7 @@ const Index = () => {
           </div>
         )}
         <ChatInput onSend={handleSendMessage} isProcessing={isProcessing} />
-        <Footer /> {/* Footer placed at the bottom of the main content area */}
+        <Footer /> 
       </div>
     </div>
   );
