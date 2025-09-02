@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd chattextgenius && npm run build",
+  "outputDirectory": "chattextgenius/dist",
+  "installCommand": "cd chattextgenius && npm install",
+  "devCommand": "cd chattextgenius && npm run dev",
+  "framework": "vite"
+}
