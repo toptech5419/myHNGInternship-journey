@@ -38,7 +38,7 @@ const Index = () => {
   const processMessage = async (message: string) => {
     try {
       const detectResponse = await axios.post(
-        "https://translation.googleapis.com/language/translate/v2/detect?key=REDACTED_GOOGLE_API_KEY",
+        `https://translation.googleapis.com/language/translate/v2/detect?key=${import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY}`,
         { q: message }
       );
       const detectedLanguage = detectResponse.data.data.detections[0][0].language;
@@ -132,7 +132,7 @@ const Index = () => {
 
     try {
       const response = await axios.post(
-        "https://translation.googleapis.com/language/translate/v2?key=REDACTED_GOOGLE_API_KEY",
+        `https://translation.googleapis.com/language/translate/v2?key=${import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY}`,
         {
           q: messageToTranslate.content,
           target: targetLanguage,
